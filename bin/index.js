@@ -90,7 +90,7 @@ function showUsage () {
 
 
     Passed string will replace passed line number on passed file.
-    If string is not provided, the line will be cleareed.
+    If string is not provided, the line will be cleared.
   `)
   process.exit()
 }
