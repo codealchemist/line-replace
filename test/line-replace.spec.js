@@ -1,7 +1,7 @@
 const {expect} = require('chai')
 const fs = require('fs')
 const path = require('path')
-const replaceLine = require('../src/replace-line')
+const replaceLine = require('../src/line-replace')
 const testFile = path.join(__dirname, '/test.txt')
 let testFileContent
 

@@ -2,7 +2,7 @@
   "name": "line-replace",
   "version": "1.0.0",
   "description": "Replace a line in a file with passed string.",
-  "main": "index.js",
+  "main": "src/line-replace.js",
   "scripts": {
     "test-focus": "standard-focus",
     "test": "standard && mocha",

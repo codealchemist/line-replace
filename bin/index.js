@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const path = require('path')
 const fs = require('fs')
-const lineReplace = require(path.join(__dirname, '../src/replace-line.js'))
+const lineReplace = require(path.join(__dirname, '../src/line-replace.js'))
 const args = process.argv.slice(2)
 
 // Print ascii art.
