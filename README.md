@@ -40,4 +40,8 @@ function onReplace({file, line, text, replacedText}) {
 
 ```
 
+## Should it work with big files?
+
+Yeah. `line-replace` uses read and write streams, so it should work ok with big files.
+
 Enjoy!
