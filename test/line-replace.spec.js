@@ -53,6 +53,25 @@ describe('programatic api', () => {
     }
   })
 
+  it('should not add new line', (done) => {
+    replaceLine({
+      file: testFile,
+      line: 1,
+      text: 'mmm... ',
+      addNewLine: false,
+      callback: onReplace
+    })
+
+    function onReplace (replaceData) {
+      const fileData = fs.readFileSync(testFile, {encoding: 'utf8'})
+      const newContent = testFileContent
+        .replace('This kinda works!\n', '')
+        .replace('First line.', 'mmm... This kinda works!')
+      expect(fileData).to.equal(newContent)
+      done()
+    }
+  })
+
   it('should pass replacement data to callback', (done) => {
     replaceLine({
       file: testFile,

@@ -28,9 +28,10 @@ Local, for programatic usage in your project:
 ```
 const replaceLine = require('line-replace')
 replaceLine({
-  file: error.file,
-  line: error.line,
-  text: fixedString,
+  file: 'a-file.txt',
+  line: 42,
+  text: 'Answer to the Ultimate Question of Life, the Universe, and Everything.',
+  addNewLine: true,
   onReplace
 })
 
@@ -38,6 +39,36 @@ function onReplace({file, line, text, replacedText}) {
 
 }
 
+```
+
+`addNewLine` defaults to `true`, which doesn't add or remove
+lines from the original document.
+
+Setting it to `false` is the equivalent of removing the passed line and appending
+the passed text to the next line.
+
+For example, with the following content:
+```
+First line.
+Second line.
+Third line.
+```
+
+Running:
+```
+replaceLine({
+  file: 'the-file.txt',
+  line: 2,
+  text: 'LOOK: ',
+  addNewLine: false,
+  onReplace
+})
+```
+
+Will result in:
+```
+First line.
+LOOK: Third line.
 ```
 
 ## Should it work with big files?

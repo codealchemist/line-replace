@@ -2,7 +2,7 @@ const fs = require('fs')
 const readline = require('readline')
 const stream = require('stream')
 
-function replaceLine ({file, line, text, callback}) {
+function replaceLine ({file, line, text, addNewLine = true, callback}) {
   const readStream = fs.createReadStream(file)
   const tempFile = `${file}.tmp`
   const writeStream = fs.createWriteStream(tempFile)
@@ -16,8 +16,8 @@ function replaceLine ({file, line, text, callback}) {
     // Replace.
     if (currentLine === line) {
       replacedText = originalLine
-      writeStream.write(`${text}\n`)
-      return
+      if (addNewLine) return writeStream.write(`${text}\n`)
+      return writeStream.write(`${text}`)
     }
 
     // Save original line.
