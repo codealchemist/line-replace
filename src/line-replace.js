@@ -2,7 +2,7 @@ const fs = require('fs')
 const readline = require('readline')
 const stream = require('stream')
 
-function replaceLine ({file, line, text, addNewLine = true, callback}) {
+function lineReplace ({file, line, text, addNewLine = true, callback}) {
   const readStream = fs.createReadStream(file)
   const tempFile = `${file}.tmp`
   const writeStream = fs.createWriteStream(tempFile)
@@ -40,4 +40,4 @@ function replaceLine ({file, line, text, addNewLine = true, callback}) {
   })
 }
 
-module.exports = replaceLine
+module.exports = lineReplace

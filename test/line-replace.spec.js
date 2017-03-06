@@ -1,7 +1,7 @@
 const {expect} = require('chai')
 const fs = require('fs')
 const path = require('path')
-const replaceLine = require('../src/line-replace')
+const lineReplace = require('../src/line-replace')
 const testFile = path.join(__dirname, '/test.txt')
 let testFileContent
 
@@ -9,7 +9,7 @@ describe('programatic api', () => {
   beforeEach(resetTestFile)
 
   it('should replace text on first line', (done) => {
-    replaceLine({
+    lineReplace({
       file: testFile,
       line: 1,
       text: 'Hi there!',
@@ -24,7 +24,7 @@ describe('programatic api', () => {
   })
 
   it('should set text on an empty line', (done) => {
-    replaceLine({
+    lineReplace({
       file: testFile,
       line: 3,
       text: `Let's rock!`,
@@ -39,7 +39,7 @@ describe('programatic api', () => {
   })
 
   it('should clear a non empty line', (done) => {
-    replaceLine({
+    lineReplace({
       file: testFile,
       line: 2,
       text: '',
@@ -54,7 +54,7 @@ describe('programatic api', () => {
   })
 
   it('should not add new line', (done) => {
-    replaceLine({
+    lineReplace({
       file: testFile,
       line: 1,
       text: 'mmm... ',
@@ -73,7 +73,7 @@ describe('programatic api', () => {
   })
 
   it('should pass replacement data to callback', (done) => {
-    replaceLine({
+    lineReplace({
       file: testFile,
       line: 1,
       text: 'Hello, everything ok there?',

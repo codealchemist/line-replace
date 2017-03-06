@@ -26,8 +26,8 @@ Local, for programatic usage in your project:
 ## Programatic usage
 
 ```
-const replaceLine = require('line-replace')
-replaceLine({
+const lineReplace = require('line-replace')
+lineReplace({
   file: 'a-file.txt',
   line: 42,
   text: 'Answer to the Ultimate Question of Life, the Universe, and Everything.',
@@ -56,7 +56,7 @@ Third line.
 
 Running:
 ```
-replaceLine({
+lineReplace({
   file: 'the-file.txt',
   line: 2,
   text: 'LOOK: ',
