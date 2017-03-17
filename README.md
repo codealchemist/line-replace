@@ -1,6 +1,8 @@
 # line-replace
 Replace a line in a file with passed string.
 
+[![Build Status](https://travis-ci.org/codealchemist/line-replace.svg?branch=master)](https://travis-ci.org/codealchemist/line-replace)
+
 ## Install
 
 Global, for command line usage:
