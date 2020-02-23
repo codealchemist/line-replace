@@ -34,13 +34,8 @@ lineReplace({
   line: 42,
   text: 'Answer to the Ultimate Question of Life, the Universe, and Everything.',
   addNewLine: true,
-  onReplace
+  callback: ({file, line, text, replacedText}) => {}
 })
-
-function onReplace({file, line, text, replacedText}) {
-
-}
-
 ```
 
 `addNewLine` defaults to `true`, which doesn't add or remove
