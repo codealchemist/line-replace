@@ -58,7 +58,7 @@ lineReplace({
   line: 2,
   text: 'LOOK: ',
   addNewLine: false,
-  onReplace
+  callback: ({file, line, text, replacedText}) => {}
 })
 ```
 
