@@ -31,26 +31,32 @@ lineReplace({
   callback: onReplace
 })
 
-function onReplace (data) {
-  if (data.text === data.replacedText) displayResult('noChanges', data)
-  if (!data.text) displayResult('lineCleared', data)
-  if (!data.replacedText) displayResult('blankLineReplaced', data)
+function onReplace(data) {
+  const { text, replacedText, error } = data
+  if (error) {
+    displayResult('error', data)
+    return
+  }
+  if (text === replacedText) displayResult('noChanges', data)
+  if (!text) displayResult('lineCleared', data)
+  if (!replacedText) displayResult('blankLineReplaced', data)
   displayResult('changed', data)
 }
 
-function displayResult (type, data) {
+function displayResult(type, data) {
   const message = getResultMessage(type, data)
   console.log(message)
   process.exit()
 }
 
-function getResultMessage (type, data) {
-  const fileLine = `${data.file}:${data.line}`
+function getResultMessage(type, data) {
+  const { file, line, text, replacedText, error } = data
+  const fileLine = `${file}:${line}`
 
   const blankLineReplaced = `
   A blank line on '${fileLine}'
   was replaced with:
-  ${data.text}
+  ${text}
   `
   const noChanges = `
   No changes to '${fileLine}'.
@@ -60,27 +66,33 @@ function getResultMessage (type, data) {
   ${fileLine}
 
   Previous content:
-  ${data.replacedText}
+  ${replacedText}
   `
   const changed = `
   The content on '${fileLine}':
-  ${data.replacedText}
+  ${replacedText}
 
   was replaced with:
-  ${data.text}
+  ${text}
+  `
+
+  const error = `
+  Replacement on '${fileLine}' FAILED:
+  ${error.message}
   `
 
   const messages = {
     blankLineReplaced,
     noChanges,
     lineCleared,
-    changed
+    changed,
+    error
   }
 
   return messages[type]
 }
 
-function showUsage () {
+function showUsage() {
   console.log(`
     USAGE:
       line-replace [file]:[line] [[string]]

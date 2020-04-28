@@ -1,11 +1,10 @@
 {
   "name": "line-replace",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "Replace a line in a file with passed string.",
   "main": "src/line-replace.js",
   "scripts": {
-    "test-focus": "standard-focus",
-    "test": "standard && mocha",
+    "test": "mocha",
     "test-watch": "mocha --watch --recursive",
     "start": "node ./bin/index.js"
   },
@@ -20,7 +19,10 @@
     "line",
     "replace"
   ],
-  "author": "Alberto Miranda",
+  "author": {
+    "name": "Alberto Miranda",
+    "url": "http://albertomiranda.com.ar"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/codealchemist/line-replace/issues"
@@ -29,14 +31,6 @@
   "dependencies": {},
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^3.2.0",
-    "standard-focus": "^1.1.1"
-  },
-  "standard": {
-    "globals": [
-      "describe",
-      "it",
-      "beforeEach"
-    ]
+    "mocha": "^3.2.0"
   }
 }

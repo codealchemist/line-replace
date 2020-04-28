@@ -1,13 +1,32 @@
 const fs = require('fs')
+const util = require('util')
 const readline = require('readline')
 const stream = require('stream')
+const exists = util.promisify(fs.exists)
+const rename = util.promisify(fs.rename)
+const unlink = util.promisify(fs.unlink)
 
-function lineReplace ({file, line, text, addNewLine = true, callback}) {
+function lineReplace({ file, line, text, addNewLine = true, callback }) {
   const readStream = fs.createReadStream(file)
   const tempFile = `${file}.tmp`
   const writeStream = fs.createWriteStream(tempFile)
   const rl = readline.createInterface(readStream, stream)
   let replacedText
+
+  readStream.on('error', async ({ message }) => {
+    await unlink(tempFile)
+    callback({ error: message, file, line, replacedText, text })
+  })
+
+  writeStream.on('error', async ({ message }) => {
+    await unlink(tempFile)
+    callback({ error: message, file, line, replacedText, text })
+  })
+
+  rl.on('error', async ({ message }) => {
+    await unlink(tempFile)
+    callback({ error: message, file, line, replacedText, text })
+  })
 
   let currentLine = 0
   rl.on('line', (originalLine) => {
@@ -27,15 +46,16 @@ function lineReplace ({file, line, text, addNewLine = true, callback}) {
   rl.on('close', () => {
     // Finish writing to temp file and replace files.
     // Replace original file with fixed file (the temp file).
-    writeStream.end(() => {
+    writeStream.end(async () => {
       try {
-        fs.unlinkSync(file) // Delete original file.
-        fs.renameSync(tempFile, file) // Rename temp file with original file name.
-      } catch (e) {
-        throw e
+        await unlink(file) // Delete original file.
+        await rename(tempFile, file) // Rename temp file with original file name.
+      } catch (error) {
+        callback({ error, file, line, replacedText, text })
+        return
       }
 
-      callback({file, line, replacedText, text})
+      callback({ file, line, replacedText, text })
     })
   })
 }
