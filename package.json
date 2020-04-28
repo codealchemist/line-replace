@@ -1,6 +1,6 @@
 {
   "name": "line-replace",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Replace a line in a file with passed string.",
   "main": "src/line-replace.js",
   "scripts": {
