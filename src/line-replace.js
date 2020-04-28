@@ -2,7 +2,6 @@ const fs = require('fs')
 const util = require('util')
 const readline = require('readline')
 const stream = require('stream')
-const exists = util.promisify(fs.exists)
 const rename = util.promisify(fs.rename)
 const unlink = util.promisify(fs.unlink)
 

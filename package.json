@@ -1,6 +1,6 @@
 {
   "name": "line-replace",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Replace a line in a file with passed string.",
   "main": "src/line-replace.js",
   "scripts": {
@@ -30,7 +30,7 @@
   "homepage": "https://github.com/codealchemist/line-replace#readme",
   "dependencies": {},
   "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^3.2.0"
+    "chai": "^4.2.0",
+    "mocha": "^7.1.2"
   }
 }
