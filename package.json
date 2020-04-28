@@ -30,7 +30,7 @@
   "homepage": "https://github.com/codealchemist/line-replace#readme",
   "dependencies": {},
   "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^3.2.0"
+    "chai": "^4.2.0",
+    "mocha": "^7.1.2"
   }
 }
