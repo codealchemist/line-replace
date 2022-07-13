@@ -5,7 +5,7 @@ const stream = require('stream')
 const rename = util.promisify(fs.rename)
 const unlink = util.promisify(fs.unlink)
 
-function lineReplace({ file, line, text, addNewLine = true, callback }) {
+function lineReplace({ file, line, text, addNewLine = true, textToReplace, callback }) {
   const readStream = fs.createReadStream(file)
   const tempFile = `${file}.tmp`
   const writeStream = fs.createWriteStream(tempFile)
@@ -33,9 +33,16 @@ function lineReplace({ file, line, text, addNewLine = true, callback }) {
 
     // Replace.
     if (currentLine === line) {
-      replacedText = originalLine
-      if (addNewLine) return writeStream.write(`${text}\n`)
-      return writeStream.write(`${text}`)
+      let output;
+      if (textToReplace) {
+        replacedText = textToReplace
+        output = originalLine.replace(textToReplace, text)
+      } else {
+        replacedText = originalLine
+        output = text
+      }
+      if (addNewLine) return writeStream.write(`${output}\n`)
+      return writeStream.write(`${output}`)
     }
 
     // Save original line.
