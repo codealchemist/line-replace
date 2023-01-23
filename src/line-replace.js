@@ -57,11 +57,10 @@ function lineReplace({ file, line, text, addNewLine = true, textToReplace, callb
         await unlink(file) // Delete original file.
         await rename(tempFile, file) // Rename temp file with original file name.
       } catch (error) {
-        callback({ error, file, line, replacedText, text })
-        return
+        return new Promise(resolve => { return { error, file, line, replacedText, text } })
       }
 
-      callback({ file, line, replacedText, text })
+      return new Promise(resolve => { return { file, line, replacedText, text } })
     })
   })
 }
